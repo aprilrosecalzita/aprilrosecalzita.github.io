@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="April Rose Calzita, healthcare virtual assistant for clinics and insurance teams.">
+<title>April Rose Calzita | Healthcare virtual assistant for clinics and insurance teams</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout: one calm column, soft banded sections, rounded cards, plum used only for accents */
+:root{
+  --bg:#FBF7F6; --blush:#F1E3E0; --lilac:#EADCF0; --accent:#6B3F7F; --text:#2A2230;
+  --muted:#5E5266; --card:#FFFFFF; --line:#E3D2D4; --on-accent:#FFFFFF; --accent-soft:#6B3F7F1A;
+  --serif:"Fraunces",Georgia,"Times New Roman",serif;
+  --sans:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#1C1721; --blush:#2B2230; --lilac:#2F2538; --accent:#D3B1E4; --text:#F4EBEF;
+  --muted:#BDAFC6; --card:#251D2B; --line:#3F3247; --on-accent:#2A2230; --accent-soft:#D3B1E433; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#1C1721; --blush:#2B2230; --lilac:#2F2538; --accent:#D3B1E4; --text:#F4EBEF;
+  --muted:#BDAFC6; --card:#251D2B; --line:#3F3247; --on-accent:#2A2230; --accent-soft:#D3B1E433; color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font:400 1.0625rem/1.65 var(--sans);-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.15;margin:0;text-wrap:balance}
+h1{font-size:clamp(2.8rem,9vw,4.75rem);letter-spacing:-.015em}
+h2{font-size:clamp(1.7rem,4.5vw,2.4rem);letter-spacing:-.01em}
+h3{font-size:1.2rem}
+p{margin:0}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
+
+.wrap{width:100%;max-width:62rem;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+section{padding-block:clamp(3rem,8vw,5rem)}
+.band-blush{background:var(--blush)}
+.band-lilac{background:var(--lilac)}
+.eyebrow{font-size:.8rem;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--accent)}
+.sec-head{display:grid;gap:.6rem;margin-bottom:2rem}
+.sec-head p{color:var(--muted);max-width:40rem}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:3rem;padding:.7rem 1.5rem;border-radius:999px;border:2px solid var(--accent);background:var(--accent);color:var(--on-accent);font:600 1rem var(--sans);text-decoration:none;cursor:pointer;transition:transform .15s ease,background .15s ease}
+.btn:hover{transform:translateY(-1px)}
+.btn.ghost{background:transparent;color:var(--accent)}
+.btn.ghost:hover{background:var(--accent-soft)}
+.btn-row{display:flex;flex-wrap:wrap;gap:.75rem}
+
+/* hero */
+.hero{background:var(--blush);margin-top:calc(-1 * env(safe-area-inset-top,0px));padding-top:env(safe-area-inset-top,0px)}
+.top{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;padding-block:1.1rem}
+.top nav{display:flex;flex-wrap:wrap;gap:.25rem 1.1rem;font-size:.95rem;font-weight:500}
+.top nav a{color:var(--text);text-decoration:none;padding:.2rem 0;border-bottom:2px solid transparent}
+.top nav a:hover{border-color:var(--accent)}
+.theme{border:1.5px solid var(--accent);background:transparent;color:var(--accent);border-radius:999px;padding:.35rem .9rem;font:600 .85rem var(--sans);cursor:pointer}
+.theme:hover{background:var(--accent-soft)}
+.hero-body{display:grid;gap:1.4rem;padding-block:clamp(2.5rem,7vw,4.5rem) clamp(3rem,8vw,5rem);max-width:44rem}
+.hero .tag{font-family:var(--serif);font-size:clamp(1.3rem,3.6vw,1.8rem);line-height:1.3;color:var(--accent);font-weight:500;max-width:30rem}
+.hero .intro{max-width:36rem;font-size:1.15rem}
+.hero .btn-row{margin-top:.4rem}
+
+/* about */
+.about-grid{display:grid;gap:1.25rem;max-width:44rem}
+.facts{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.5rem}
+.fact{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:.4rem 1rem;font-size:.92rem;font-weight:500}
+
+/* services tabs */
+.tabs{display:inline-flex;flex-wrap:wrap;gap:.4rem;background:var(--blush);padding:.35rem;border-radius:999px;margin-bottom:1.5rem}
+.tab{border:0;background:transparent;color:var(--text);font:600 .98rem var(--sans);padding:.65rem 1.3rem;border-radius:999px;cursor:pointer;min-height:2.75rem}
+.tab[aria-selected="true"]{background:var(--accent);color:var(--on-accent)}
+.tab:not([aria-selected="true"]):hover{background:var(--accent-soft)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:1.5rem;padding:1.5rem;display:grid;gap:.6rem;align-content:start;min-width:0}
+.card p{color:var(--muted);font-size:1rem}
+.card ul{margin:0;padding-left:1.1rem;color:var(--muted)}
+.card li+li{margin-top:.25rem}
+.privacy{margin-top:1.5rem;background:var(--lilac);border-radius:1.5rem;padding:1.25rem 1.5rem;display:grid;gap:.25rem}
+.privacy b{font-family:var(--serif);font-weight:600;font-size:1.1rem;color:var(--accent)}
+
+/* sample work */
+.badge{display:inline-block;background:var(--card);border:1.5px solid var(--accent);color:var(--accent);border-radius:999px;padding:.35rem 1rem;font-size:.9rem;font-weight:600;margin-bottom:1.25rem}
+.tablewrap{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:1.5rem}
+table{border-collapse:collapse;width:100%;min-width:42rem;font-size:.98rem}
+th,td{text-align:left;padding:.9rem 1.1rem;vertical-align:top}
+th{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:600;border-bottom:2px solid var(--line)}
+td{border-bottom:1px solid var(--line)}
+tr:last-child td{border-bottom:0}
+td:first-child{font-weight:600;white-space:nowrap}
+.captions{margin-top:1.5rem;display:grid;gap:.6rem}
+.captions h3{margin-bottom:.4rem}
+details{background:var(--card);border:1px solid var(--line);border-radius:1.25rem;padding:0 1.25rem}
+summary{cursor:pointer;padding:1rem 0;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:1rem;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-size:1.4rem;line-height:1;color:var(--accent);flex:none}
+details[open] summary::after{content:"\2212"}
+details .cap{padding:0 0 1.2rem;color:var(--muted);display:grid;gap:.7rem}
+details .cap p{color:var(--text)}
+.note{font-size:.92rem;color:var(--muted);margin-top:1rem}
+
+/* experience */
+.exp-list{display:grid;gap:2rem}
+.exp{border-left:2px solid var(--accent);padding-left:1.4rem;display:grid;gap:.5rem}
+.exp .when{font-size:.9rem;font-weight:600;color:var(--accent);letter-spacing:.03em}
+.exp .org{color:var(--muted)}
+.exp ul{margin:.3rem 0 0;padding-left:1.1rem}
+.exp li+li{margin-top:.3rem}
+.sub{margin-top:2.75rem;display:grid;gap:.9rem}
+.sub h3{font-size:1.35rem}
+.tags{display:flex;flex-wrap:wrap;gap:.5rem}
+.tags span{background:var(--lilac);border-radius:999px;padding:.35rem .95rem;font-size:.92rem;font-weight:500}
+
+/* certification */
+.cert{background:var(--card);border:1px solid var(--line);border-radius:1.75rem;padding:clamp(1.4rem,4vw,2.2rem);display:grid;gap:.8rem;max-width:36rem}
+.cert .seal{width:3rem;height:3rem;border-radius:50%;background:var(--lilac);display:grid;place-items:center;color:var(--accent)}
+.cert dl{display:grid;grid-template-columns:auto 1fr;gap:.35rem 1.2rem;margin:.4rem 0 0}
+.cert dt{color:var(--muted)}
+.cert dd{margin:0;font-weight:500}
+.cert .req{font-weight:600;color:var(--accent);margin-top:.4rem}
+
+/* contact */
+.contact-card{display:grid;gap:1.25rem;max-width:40rem}
+.contact-list{display:grid;gap:.9rem}
+.contact-list div{display:grid;gap:.1rem}
+.contact-list dt{font-size:.8rem;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);font-weight:600}
+.contact-list dd{margin:0;font-size:1.15rem;overflow-wrap:anywhere}
+.contact-list{margin:0}
+.copied{font-size:.9rem;color:var(--muted);min-height:1.4em}
+footer{padding-block:2rem;text-align:center;color:var(--muted);font-size:.9rem;background:var(--bg)}
+
+@media (max-width:520px){.tabs{display:grid;width:100%;border-radius:1.5rem}.tab{width:100%}.cert dl{grid-template-columns:1fr;gap:0}.cert dd{margin-bottom:.6rem}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
+</style>
+
+</head>
+<body>
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="top">
+      <nav aria-label="Main">
+        <a href="#about">About me</a><a href="#services">Services</a><a href="#sample-work">Sample work</a><a href="#experience">Experience</a><a href="#certification">Certification</a><a href="#contact">Contact</a>
+      </nav>
+      <button class="theme" id="themeBtn" type="button" aria-label="Switch to dark mode">Dark mode</button>
+    </div>
+    <div class="hero-body">
+      <h1>April Rose Calzita</h1>
+      <p class="tag">Healthcare virtual assistant for clinics and insurance teams</p>
+      <p class="intro">I help clinics and insurance teams stay organized with clear, careful admin support, and I help healthcare businesses show up online with thoughtful social media. I bring over seven years of experience, from health insurance customer service to remote administrative work.</p>
+      <div class="btn-row">
+        <a class="btn" href="mailto:aprilcalzita@gmail.com">Email me</a>
+        <a class="btn ghost" href="#sample-work">See sample work</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head"><p class="eyebrow">About me</p><h2>Clear, kind support, from insurance calls to inboxes</h2></div>
+    <div class="about-grid">
+      <p>I started my career at Teleperformance, answering health insurance questions for Blue Shield of California members. Every call taught me the same thing: people feel better when someone explains their coverage clearly and kindly.</p>
+      <p>I carried that habit into four years of remote admin work at Authority Appraisals, managing inboxes, quotations, payments, and deadlines. Now I bring that mix of healthcare knowledge and organized support to clinics and insurance teams, and I'm adding social media management for healthcare businesses.</p>
+      <div class="facts"><span class="fact">Tacloban City, Philippines</span><span class="fact">Over seven years of experience</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="services" class="band-lilac">
+  <div class="wrap">
+    <div class="sec-head"><p class="eyebrow">Services</p><h2>Two ways I can help</h2></div>
+    <div class="tabs" role="tablist" aria-label="Services">
+      <button class="tab" role="tab" id="tab-admin" aria-controls="panel-admin" aria-selected="true" type="button">Clinic admin support</button>
+      <button class="tab" role="tab" id="tab-social" aria-controls="panel-social" aria-selected="false" tabindex="-1" type="button">Social media management</button>
+    </div>
+    <div role="tabpanel" id="panel-admin" aria-labelledby="tab-admin" class="cards">
+      <div class="card"><h3>Inbox and calendar</h3><ul><li>Organizing and replying to emails</li><li>Scheduling and reminders</li><li>Keeping deadlines in view</li></ul></div>
+      <div class="card"><h3>Insurance and billing support</h3><ul><li>Insurance verification and benefits checking</li><li>Claims and billing questions</li><li>Quotation and payment follow-up</li></ul></div>
+      <div class="card"><h3>Records and coordination</h3><ul><li>Data entry and organized records</li><li>Coordinating between clients and providers</li><li>Reports delivered on time</li></ul></div>
+    </div>
+    <div role="tabpanel" id="panel-social" aria-labelledby="tab-social" class="cards" hidden>
+      <div class="card"><h3>Content planning</h3><ul><li>Weekly or monthly content plans</li><li>Topics that match your clinic's services</li><li>A simple posting schedule</li></ul></div>
+      <div class="card"><h3>Creating and posting</h3><ul><li>Writing captions in a warm, plain voice</li><li>Preparing posts and graphics</li><li>Scheduling and publishing</li></ul></div>
+      <div class="card"><h3>Community and reporting</h3><ul><li>Replying to comments and messages</li><li>Keeping private details out of public replies</li><li>Simple reports on what was posted</li></ul></div>
+    </div>
+    <div class="privacy"><b>Privacy first</b><p>I never post patient names, photos, or details without proper written permission.</p></div>
+  </div>
+</section>
+
+<section id="sample-work">
+  <div class="wrap">
+    <div class="sec-head"><p class="eyebrow">Sample work</p><h2>A 7-day content plan</h2></div>
+    <span class="badge">Sample work for a fictional clinic. No patient information or medical advice.</span>
+    <div class="tablewrap" tabindex="0" role="region" aria-label="7-day content plan table">
+      <table>
+        <thead><tr><th scope="col">Day</th><th scope="col">Format</th><th scope="col">Topic</th><th scope="col">Opening line</th></tr></thead>
+        <tbody>
+          <tr><td>Monday</td><td>Photo post</td><td>What to bring to your first visit</td><td>Your first visit is easier with a few things in hand.</td></tr>
+          <tr><td>Tuesday</td><td>Carousel</td><td>How to reschedule an appointment</td><td>Plans change, and that is okay.</td></tr>
+          <tr><td>Wednesday</td><td>Short video</td><td>Behind the front desk</td><td>Here is what happens before you walk through our door.</td></tr>
+          <tr><td>Thursday</td><td>Text graphic</td><td>Insurance words, explained simply</td><td>A copay is a set amount you pay at the time of a visit.</td></tr>
+          <tr><td>Friday</td><td>Story poll</td><td>What should we explain next?</td><td>Help us choose our next topic.</td></tr>
+          <tr><td>Saturday</td><td>Photo post</td><td>Our privacy promise</td><td>Your information stays private.</td></tr>
+          <tr><td>Sunday</td><td>Text graphic</td><td>The week ahead</td><td>Here is a quick look at the week ahead.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="captions">
+      <h3>Full captions</h3>
+      <details><summary>Monday: What to bring to your first visit</summary><div class="cap">
+        <p>Your first visit is easier with a few things in hand.</p>
+        <p>Please bring a photo ID, your insurance card, and any questions you would like to ask. If you are not sure what else we need, send us a message and our front desk team will help.</p>
+        <p>We look forward to meeting you.</p></div></details>
+      <details><summary>Tuesday: How to reschedule an appointment</summary><div class="cap">
+        <p>Plans change, and that is okay.</p>
+        <p>Swipe to see how to reschedule: call or message us, tell us your name and your current appointment time, and we will find a new time that works for you. The sooner you let us know, the easier it is to find a good spot.</p></div></details>
+      <details><summary>Wednesday: Behind the front desk</summary><div class="cap">
+        <p>Here is what happens before you walk through our door.</p>
+        <p>In this short video, our front desk team shows how we prepare for the day: confirming appointments, checking schedules, and getting everything ready so your visit starts smoothly.</p></div></details>
+      <details><summary>Thursday: Insurance words, explained simply</summary><div class="cap">
+        <p>A copay is a set amount you pay at the time of a visit.</p>
+        <p>Your plan may be different, so check your insurance card or ask our team. We are happy to explain the words on your plan in plain language.</p></div></details>
+      <details><summary>Friday: What should we explain next?</summary><div class="cap">
+        <p>Help us choose our next topic.</p>
+        <p>Vote in our story poll: appointment steps, insurance words, or what to bring to a visit. We will cover the most popular one next week.</p></div></details>
+      <details><summary>Saturday: Our privacy promise</summary><div class="cap">
+        <p>Your information stays private.</p>
+        <p>We do not share patient names, photos, or details online without written permission. If you have a question about how we protect your information, our team is glad to talk with you.</p></div></details>
+      <details><summary>Sunday: The week ahead</summary><div class="cap">
+        <p>Here is a quick look at the week ahead.</p>
+        <p>[Opening hours for the week] [Any closed days] [How to reach us]. We are here to help you plan your visit.</p></div></details>
+    </div>
+    <p class="note">The clinic, posts, and captions on this page are made up to show how I plan and write content.</p>
+  </div>
+</section>
+
+<section id="experience" class="band-blush">
+  <div class="wrap">
+    <div class="sec-head"><p class="eyebrow">Experience</p><h2>Over seven years in healthcare and admin work</h2></div>
+    <div class="exp-list">
+      <div class="exp">
+        <span class="when">2022 to January 2026</span>
+        <h3>Virtual administrative assistant</h3>
+        <span class="org">Authority Appraisals</span>
+        <ul>
+          <li>Managed inboxes, quotations, payments, and deadlines for clients and licensed appraisers.</li>
+          <li>Handled communication between appraisers and clients, in both directions.</li>
+          <li>Delivered reports and took care of data entry and other admin work.</li>
+        </ul>
+      </div>
+      <div class="exp">
+        <span class="when">2017 to 2021</span>
+        <h3>Customer service representative</h3>
+        <span class="org">Teleperformance, supporting Blue Shield of California members</span>
+        <ul>
+          <li>Helped members with claims, benefits, and provider questions.</li>
+          <li>Explained coverage clearly and kindly.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="sub">
+      <h3>Tools I use</h3>
+      <div class="tags"><span>Google Workspace</span><span>Microsoft Office</span><span>Google Calendar</span><span>Slack</span><span>Front</span><span>Trello</span></div>
+    </div>
+    <div class="sub">
+      <h3>Education</h3>
+      <div class="exp"><span class="when">2017</span><h3 style="font-size:1.1rem">BA in English language</h3><span class="org">Eastern Visayas State University</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="certification">
+  <div class="wrap">
+    <div class="sec-head"><p class="eyebrow">Certification</p><h2>Trained to protect patient information</h2></div>
+    <div class="cert">
+      <div class="seal" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5 20 5.5v6c0 4.7-3.2 8.2-8 10-4.8-1.8-8-5.3-8-10v-6z"/><path d="m8.8 12 2.4 2.4 4.2-4.6"/></svg></div>
+      <h3>HIPAA compliance training program</h3>
+      <p>HIPAATraining.us</p>
+      <dl>
+        <dt>Completed</dt><dd>October 28, 2026</dd>
+        <dt>Valid until</dt><dd>October 28, 2027</dd>
+      </dl>
+      <p class="req">Certificate available on request.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="band-lilac">
+  <div class="wrap">
+    <div class="contact-card">
+      <p class="eyebrow">Contact</p>
+      <h2>Let's talk about your clinic</h2>
+      <dl class="contact-list">
+        <div><dt>Email</dt><dd id="emailText">aprilcalzita@gmail.com</dd></div>
+        <div><dt>Location</dt><dd>Tacloban City, Philippines</dd></div>
+      </dl>
+      <div class="btn-row">
+        <a class="btn" href="mailto:aprilcalzita@gmail.com">Email me</a>
+        <button class="btn ghost" id="copyBtn" type="button">Copy email</button>
+      </div>
+      <p class="copied" id="copied" role="status"></p>
+    </div>
+  </div>
+</section>
+</main>
+<footer><div class="wrap">April Rose Calzita · Healthcare virtual assistant</div></footer>
+
+<script>
+(function(){
+  // services tabs
+  var tabs=[].slice.call(document.querySelectorAll('[role=tab]'));
+  function select(t){
+    tabs.forEach(function(x){
+      var on=x===t;
+      x.setAttribute('aria-selected',on);x.tabIndex=on?0:-1;
+      document.getElementById(x.getAttribute('aria-controls')).hidden=!on;
+    });
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){select(t)});
+    t.addEventListener('keydown',function(e){
+      var n=null;
+      if(e.key==='ArrowRight'||e.key==='ArrowDown')n=tabs[(i+1)%tabs.length];
+      if(e.key==='ArrowLeft'||e.key==='ArrowUp')n=tabs[(i-1+tabs.length)%tabs.length];
+      if(e.key==='Home')n=tabs[0];
+      if(e.key==='End')n=tabs[tabs.length-1];
+      if(n){e.preventDefault();n.focus();select(n)}
+    });
+  });
+
+  // theme toggle
+  var root=document.documentElement,btn=document.getElementById('themeBtn');
+  function isDark(){
+    var a=root.getAttribute('data-theme');
+    if(a)return a==='dark';
+    return window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  function label(){var d=isDark();btn.textContent=d?'Light mode':'Dark mode';btn.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode')}
+  try{var s=localStorage.getItem('theme');if(s)root.setAttribute('data-theme',s)}catch(e){}
+  label();
+  btn.addEventListener('click',function(){
+    var next=isDark()?'light':'dark';
+    root.setAttribute('data-theme',next);
+    try{localStorage.setItem('theme',next)}catch(e){}
+    label();
+  });
+
+  // copy email
+  var out=document.getElementById('copied'),email='aprilcalzita@gmail.com';
+  function fallback(){
+    var r=document.createRange();r.selectNodeContents(document.getElementById('emailText'));
+    var sel=getSelection();sel.removeAllRanges();sel.addRange(r);
+    out.textContent='Email address selected. Copy it to use it.';
+  }
+  document.getElementById('copyBtn').addEventListener('click',function(){
+    try{
+      navigator.clipboard.writeText(email).then(function(){out.textContent='Email address copied.'},fallback);
+    }catch(e){fallback()}
+  });
+})();
+</script>
+
+</body>
+</html>
