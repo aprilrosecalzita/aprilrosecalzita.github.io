@@ -627,10 +627,14 @@ body{position:relative}
     btn.disabled=true;btn.textContent='Sending...';note.textContent='Sending your message...';
     fetch('https://formsubmit.co/ajax/aprilcalzita@gmail.com',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
       body:JSON.stringify({name:n.value.trim(),email:m.value.trim(),message:g.value.trim(),_subject:'New message from '+n.value.trim()+' (portfolio website)',_replyto:m.value.trim(),_template:'table',_captcha:'false'})})
-    .then(function(r){return r.json()}).then(function(d){
+    .then(function(r){return r.json().catch(function(){return{success:false,message:'Bad response ('+r.status+')'}})}).then(function(d){
       if(d&&(d.success===true||d.success==='true')){form.reset();note.textContent='Thank you! Your message was sent. April will reply to your email soon.';btn.textContent='Message sent'}
-      else throw 0;
-    }).catch(function(){btn.disabled=false;btn.textContent='Send message';note.innerHTML='Sorry, your message could not be sent. Please email <a href="mailto:aprilcalzita@gmail.com">aprilcalzita@gmail.com</a> instead.'});
+      else{var e=new Error(d&&d.message||'Not accepted');e.fromServer=true;throw e}
+    }).catch(function(err){
+      var why=err&&err.fromServer?'The sending service said: '+err.message:'This page could not reach the sending service (blocked or offline).';
+      try{console.warn('Form error:',err)}catch(x){}
+      btn.disabled=false;btn.textContent='Send message';
+      note.innerHTML='Sorry, your message could not be sent. Please try again, or email <a href="mailto:aprilcalzita@gmail.com">aprilcalzita@gmail.com</a>.<br><small>'+why+'</small>'});
     return;
   });
   var out=document.getElementById('copied'),email='aprilcalzita@gmail.com';
