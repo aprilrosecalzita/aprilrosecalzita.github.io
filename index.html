@@ -529,8 +529,9 @@ body{position:relative}
       <label for="f-name">Your name</label><input id="f-name" name="name" type="text" autocomplete="name" required>
       <label for="f-email">Your email</label><input id="f-email" name="email" type="email" autocomplete="email" required>
       <label for="f-msg">How can I help?</label><textarea id="f-msg" name="message" rows="4" required></textarea>
-      <button class="btn" type="submit">Email me</button>
-      <p class="fnote" id="fnote" role="status">This opens your email app with your message ready to send.</p>
+      <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+      <button class="btn" type="submit">Send message</button>
+      <p class="fnote" id="fnote" role="status">Your message goes straight to April's inbox. No email app needed.</p>
     </form>
   </div>
 </section>
@@ -621,9 +622,16 @@ body{position:relative}
   if(form)form.addEventListener('submit',function(e){
     e.preventDefault();var n=document.getElementById('f-name'),m=document.getElementById('f-email'),g=document.getElementById('f-msg'),note=document.getElementById('fnote');
     if(!n.value.trim()||!m.value.trim()||!g.value.trim()){note.textContent='Please fill in your name, email, and message.';return}
-    var body=g.value.trim()+'\n\nFrom: '+n.value.trim()+' ('+m.value.trim()+')';
-    note.textContent='Opening your email app. If nothing opens, write to aprilcalzita@gmail.com.';
-    location.href='mailto:aprilcalzita@gmail.com?subject='+encodeURIComponent('Message from '+n.value.trim())+'&body='+encodeURIComponent(body);
+    var btn=form.querySelector('button[type=submit]'),hp=form.querySelector('[name=_honey]');
+    if(hp&&hp.value)return;
+    btn.disabled=true;btn.textContent='Sending...';note.textContent='Sending your message...';
+    fetch('https://formsubmit.co/ajax/aprilcalzita@gmail.com',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({name:n.value.trim(),email:m.value.trim(),message:g.value.trim(),_subject:'New message from '+n.value.trim()+' (portfolio website)',_replyto:m.value.trim(),_template:'table',_captcha:'false'})})
+    .then(function(r){return r.json()}).then(function(d){
+      if(d&&(d.success===true||d.success==='true')){form.reset();note.textContent='Thank you! Your message was sent. April will reply to your email soon.';btn.textContent='Message sent'}
+      else throw 0;
+    }).catch(function(){btn.disabled=false;btn.textContent='Send message';note.innerHTML='Sorry, your message could not be sent. Please email <a href="mailto:aprilcalzita@gmail.com">aprilcalzita@gmail.com</a> instead.'});
+    return;
   });
   var out=document.getElementById('copied'),email='aprilcalzita@gmail.com';
   function fallback(){var r=document.createRange();r.selectNodeContents(document.getElementById('emailText'));var sel=getSelection();sel.removeAllRanges();sel.addRange(r);out.textContent='Email address selected. Copy it to use it.'}
