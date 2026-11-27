@@ -302,7 +302,15 @@ body{position:relative}
 .sc.s4{background:var(--card);color:var(--accent);border:2px solid var(--line)}
 .sc.s5{background:linear-gradient(135deg,#19C3D6,#7BE9F2);color:#04222A}
 @media (min-width:1360px){.scatter{z-index:2}.sc{opacity:.95}}
-@media (max-width:760px){.sc:not(.m){display:none}.sc{--sz:2.3rem!important;opacity:.4}}
+@media (max-width:760px){.sc{--sz:2.5rem!important;opacity:.55}}
+/* touch screens have no hover, so the same lift and zoom play when the item is in view */
+@media (hover:none){
+  .why article.live{transform:translateY(-6px);box-shadow:0 22px 40px -26px rgba(11,27,63,.55)}
+  .pic.live img,.arch.live img{transform:scale(1.05)}
+  .shot.live img{transform:scale(1.025)}
+  .tile{transition:transform .4s ease}.tile.live{transform:translateY(-4px)}
+  .btn:active{transform:translateY(-1px) scale(.98)}
+}
 /* scroll reveal: elements start visible and only hide when script marks them as below the fold */
 .rv.will{opacity:0;transform:translateY(28px) scale(.98);transition:opacity .8s ease,transform .8s ease}
 .rv.will.in{opacity:1;transform:none}
@@ -606,6 +614,11 @@ body{position:relative}
       if(r.bottom<0||r.top>innerHeight)return;
       var p=(r.top+r.height/2-innerHeight/2)/innerHeight;im.style.translate='0 '+(p*-28).toFixed(1)+'px'})}
     addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(move)}},{passive:true});move();
+  }
+  /* same hover feel on phones and tablets: play it while the item sits mid-screen */
+  if(window.matchMedia&&matchMedia('(hover:none)').matches&&'IntersectionObserver' in window){
+    var lv=new IntersectionObserver(function(es){es.forEach(function(e){e.target.classList.toggle('live',e.isIntersecting)})},{rootMargin:'-30% 0px -30% 0px'});
+    [].slice.call(document.querySelectorAll('.why article,.pic,.arch,.shot,.tile')).forEach(function(el){lv.observe(el)});
   }
   var steps=[].slice.call(document.querySelectorAll('#steps li')),timer=null,idx=-1;
   function tick(){idx=(idx+1)%(steps.length+1);
